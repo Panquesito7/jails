@@ -6,7 +6,7 @@ Commands
 
 You can use `*` if you need to explicitly specify the default jail for a command.
 
-  * `/jail [Player] [Jail]` - Jail a player or yourself.  Note that it prefers
+  * `/jail [Player] [<jail>]` - Jail a player or yourself.  Note that it prefers
 	players over jails if there are two of the same name.
 
 		/jail player
@@ -15,12 +15,12 @@ You can use `*` if you need to explicitly specify the default jail for a command
 		/jail          -- ^
 
 
-  * `/unjail [Player]` - Unjail a player or yourself.
+  * `/unjail [<player>]` - Unjail a player or yourself.
 
 		/unjail player
 		/unjail
 
-  * `/add_jail [Jail] [X Y Z|X,Y,Z]` - Adds a new jail at your coordinates or
+  * `/add_jail [<jail>] [<X> <Y> <Z> | <X>,<Y>,<Z>]` - Adds a new jail at your coordinates or
 	the ones specified.
 
 		/add_jail foojail -32 8 128
@@ -28,7 +28,7 @@ You can use `*` if you need to explicitly specify the default jail for a command
 		/add_jail -16 64 512  (These add a jail with the default name)
 		/add_jail
 
-  * `/remove_jail [Jail [NewJail]]` - Removes a jail.  Note: This will unjail
+  * `/remove_jail [<jail>] [new_jail]` - Removes a jail.  Note: This will unjail
 	any players jailed in the jail unless `newJail` is specified, in which
 	case it will move them to the new jail.
 
@@ -37,7 +37,7 @@ You can use `*` if you need to explicitly specify the default jail for a command
 		/remove_jail * foojail  (Replaces the default jail with foojail)
 		/remove_jail            (Removes default jail)
 
-  * `/list_jails [Jail]` - Prints data about all jails or a jail, including
+  * `/list_jails [<jail>]` - Prints data about all jails or a jail, including
 	their location and the captives in them.
 	Output is in the format `jailName (X,Y,Z): [captives]`.
 	Coordinates are rounded.
@@ -45,7 +45,7 @@ You can use `*` if you need to explicitly specify the default jail for a command
 		/list_jails foojail
 		/list_jails
 
-  * `/move_jail [Jail] [X Y Z|X,Y,Z]` - Move a jail
+  * `/move_jail [<jail>] [<X> <Y> <Z> | <X>,<Y>,<Z>]` - Move a jail
 
 		/move_jail foobar 0 8 0
 		/move_jail 0 8 0     (uses the default jail)
