@@ -1,4 +1,3 @@
-
 function jails:jail(playerName, jailName)
 	jailName = jailName or self.default
 	local jail = self.jails[jailName]
@@ -14,10 +13,10 @@ function jails:jail(playerName, jailName)
 	local pos, message
 	local player = minetest.get_player_by_name(playerName)
 	if player then
-		pos = player:getpos()
-		player:setpos(jail.pos)
+		pos = player:get_pos()
+		player:set_pos(jail.pos)
 		if jails.announce then
-			minetest.chat_send_all(playerName.." has been jailed!")
+			minetest.chat_send_all(playerName .. " has been jailed!")
 		else
 			minetest.chat_send_player(playerName, "You have been jailed.")
 		end
@@ -146,13 +145,12 @@ end
 function jails:release(playerName, playerData)
 	local player = minetest.get_player_by_name(playerName)
 	if player then
-		player:setpos(self:getSpawnPos(playerData.pos))
+		player:set_pos(self:getSpawnPos(playerData.pos))
 	end
 	minetest.set_player_privs(playerName, playerData.privs)
 	if self.announce then
-		minetest.chat_send_all(playerName.." has been freed from jail!")
+		minetest.chat_send_all(playerName .. " has been freed from jail!")
 	else
 		minetest.chat_send_player(playerName, "You have been freed from jail.")
 	end
 end
-
