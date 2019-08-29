@@ -11,9 +11,9 @@ end
 
 
 minetest.register_chatcommand("jail", {
-	params = "[Player] [Jail]",
+	params = "[<player>] [<jail>]",
 	description = "Jail a player.",
-	privs = {jailer=true},
+	privs = {jailer = true},
 	func = function(name, param)
 		if param == "" then
 			return jails:jail(name)
@@ -34,9 +34,9 @@ minetest.register_chatcommand("jail", {
 
 
 minetest.register_chatcommand("unjail", {
-	params = "[Player]",
+	params = "[<player>]",
 	description = "Unjail a player or yourself",
-	privs = {jailer=true},
+	privs = {jailer = true},
 	func = function(name, param)
 		if param == "" then
 			if jails:getJail(name) then
@@ -62,7 +62,7 @@ minetest.register_chatcommand("unjail", {
 minetest.register_chatcommand("add_jail", {
 	params = "[jail] [X Y Z|X,Y,Z]",
 	description = "Adds a new jail at your coordinates or the ones specified.",
-	privs = {jailer=true},
+	privs = {jailer = true},
 	func = function(name, param)
 		local errMustBeConnected = "You must be connected to use this command without a position."
 		if param == "" then
@@ -71,7 +71,7 @@ minetest.register_chatcommand("add_jail", {
 			if jails.jails[jails.default] then
 				return false, "The default jail already exists."
 			end
-			local pos = vector.round(player:getpos())
+			local pos = vector.round(player:get_pos())
 			jails:add(jails.default, pos)
 			return true, ("Default jail added at %s.")
 				:format(minetest.pos_to_string(pos))
@@ -102,7 +102,7 @@ minetest.register_chatcommand("add_jail", {
 			end
 			local player = minetest.get_player_by_name(name)
 			if not player then return false, errMustBeConnected end
-			pos = vector.round(player:getpos())
+			pos = vector.round(player:get_pos())
 			jails:add(jailName, pos)
 			return true, ("Jail added at %s.")
 					:format(minetest.pos_to_string(pos))
@@ -123,9 +123,9 @@ minetest.register_chatcommand("add_jail", {
 
 
 minetest.register_chatcommand("remove_jail", {
-	params = "[Jail [NewJail]]",
+	params = "[<jail>] [<new_jail>]",
 	description = "Remove a jail, unjailing all players in it or moving them to a new jail.",
-	privs = {jailer=true},
+	privs = {jailer = true},
 	func = function(name, param)
 		if param == "" then
 			local ok, err = jails:remove()
@@ -153,7 +153,7 @@ minetest.register_chatcommand("remove_jail", {
 
 
 minetest.register_chatcommand("list_jails", {
-	params = "[Jail]",
+	params = "[<jail>]",
 	description = "Prints information on all jails or a specific jail.",
 	func = function(name, param)
 		local function formatJail(name, data)
@@ -184,9 +184,9 @@ minetest.register_chatcommand("list_jails", {
 
 
 minetest.register_chatcommand("move_jail", {
-	params = "[Jail] [X Y Z|X,Y,Z]",
-	description = "Moves a jail.",
-	privs = {jailer=true},
+	params = "[<jail>] [<X> <Y> <Z> | <X>,<Y>,<Z>]",
+	description = "Move a jail to somewhere else.",
+	privs = {jailer = true},
 	func = function(name, param)
 		local player = minetest.get_player_by_name(name)
 		if not player then return end
@@ -196,7 +196,7 @@ minetest.register_chatcommand("move_jail", {
 			for name, data in pairs(jail.captives) do
 				local player = minetest.get_player_by_name(data)
 				if player then
-					player:setpos(jails:getSpawnPos(data.pos))
+					player:set_pos(jails:getSpawnPos(data.pos))
 				end
 			end
 			jails:save()
@@ -205,7 +205,7 @@ minetest.register_chatcommand("move_jail", {
 			if not jails.jails[jails.default] then
 				return false, "The default jail does not exist yet!"
 			end
-			local pos = vector.round(player:getpos())
+			local pos = vector.round(player:get_pos())
 			doMove(jails.default, pos)
 			return true, ("Default jail moved to %s.")
 					:format(minetest.pos_to_string(pos))
@@ -249,4 +249,3 @@ minetest.register_chatcommand("move_jail", {
 				:format(jailNameMatch)
 	end
 })
-
