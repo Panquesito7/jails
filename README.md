@@ -1,4 +1,4 @@
-Jails for Minetest 0.4
+Jails for Minetest 5.0.0+
 ======================
 
 Commands
@@ -122,4 +122,3 @@ Variables are documented in the format `variableName = defaultValue`.
 		}
 
   * `jails.default` - The name of the default jail.  Read-only.
-
